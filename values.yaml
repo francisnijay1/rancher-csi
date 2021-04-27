@@ -1,7 +1,6 @@
 certSecretCount: 1
 
 syncNodeInfoInterval: 15
-storageType: unity
 
 volumeNamePrefix: csivol
 
