@@ -4,6 +4,15 @@ namespace: unity
 labels:
   io.rancher.certified: partner
 questions: 
+- variable: storageType
+  label: "Defines the csi driver to install"
+  type: enum
+  required: true
+  group: "General settings (Required)"
+  options:
+    - "unity"
+    - "powerflex"
+    
 - variable: volumeNamePrefix
   label: "Defines a string prepended to each volume created"
   type: string
