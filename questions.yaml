@@ -1,6 +1,5 @@
 categories:
 - storage
-namespace: unity
 labels:
   io.rancher.certified: partner
 questions: 
