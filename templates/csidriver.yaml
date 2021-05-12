@@ -4,8 +4,13 @@ apiVersion: storage.k8s.io/v1beta1
 apiVersion: storage.k8s.io/v1
 {{- end }}
 kind: CSIDriver
+{{ if eq .Values.storageType "unity" }}
 metadata:
     name: csi-unity.dellemc.com
+{{ else if eq .Values.storageType "powerscale" }}
+metadata:
+    name: csi-isilon.dellemc.com
+{{ end }}
 spec:
     attachRequired: true
     podInfoOnMount: true
