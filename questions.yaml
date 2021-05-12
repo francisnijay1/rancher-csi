@@ -102,20 +102,28 @@ questions:
   required: false
   group: "General settings (Required)"
   
-- variable: isiInsecure
-  label: "Defines if PowerScale OneFS API server's certificate chain and host name should be verified"
-  type: boolean
-  default: true
-  show_if: "storageType=isilon"
-  required: true
-  group: "General settings (Required)"
-  
 - variable: isiAccessZone
   label: "Defines the name of the access zone a volume can be created in"
   type: string
   default: "System"
   show_if: "storageType=isilon"
   required: false
+  group: "General settings (Required)"
+  
+- variable: isiPath
+  label: "Defines the default base path for the volumes to be created"
+  type: string
+  default: "/ifs/data/csi"
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: maxIsilonVolumesPerNode
+  label: "Specify default value for maximum number of volumes that controller can publish to the node"
+  type: int
+  default: 0
+  show_if: "storageType=isilon"
+  required: true
   group: "General settings (Required)"
   
 - variable: enableDebug
@@ -142,18 +150,18 @@ questions:
   required: true
   group: "General settings (Required)"
   
+- variable: isiInsecure
+  label: "Defines if PowerScale OneFS API server's certificate chain and host name should be verified"
+  type: boolean
+  default: true
+  show_if: "storageType=isilon"
+  required: true
+  group: "General settings (Required)"
+  
 - variable: noProbeOnStart
   label: "Indicates whether the controller/node should probe during initialization"
   type: boolean
   default: false
-  show_if: "storageType=isilon"
-  required: false
-  group: "General settings (Required)"
-  
-- variable: isiPath
-  label: "Defines the default base path for the volumes to be created"
-  type: string
-  default: "/ifs/data/csi"
   show_if: "storageType=isilon"
   required: false
   group: "General settings (Required)"
@@ -182,10 +190,3 @@ questions:
   required: false
   group: "General settings (Required)"
   
-- variable: maxIsilonVolumesPerNode
-  label: "Specify default value for maximum number of volumes that controller can publish to the node"
-  type: int
-  default: 0
-  show_if: "storageType=isilon"
-  required: true
-  group: "General settings (Required)"
