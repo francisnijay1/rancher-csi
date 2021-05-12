@@ -26,7 +26,6 @@ podmon:
   image:
 
 images:
-  driver: dellemc/csi-unity:v1.5.0
 
   attacher: k8s.gcr.io/sig-storage/csi-attacher:v3.1.0
 
@@ -37,3 +36,7 @@ images:
   registrar: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.1.0
 
   resizer:  quay.io/k8scsi/csi-resizer:v1.1.0
+  
+  driver: 
+    unity: dellemc/csi-unity:v1.5.0
+    isilon: dellemc/csi-isilon:v1.5.0
