@@ -10,7 +10,7 @@ questions:
   group: "General settings (Required)"
   options:
     - "unity"
-    - "powerflex"
+    - "isilon"
     
 - variable: volumeNamePrefix
   label: "Defines a string prepended to each volume created"
@@ -25,15 +25,6 @@ questions:
   default: "csi-snap"
   required: true
   group: "General settings (Required)"
-  
-- variable: defaultFsType
-  label: "Defines Filesystem format"
-  type: enum
-  required: true
-  group: "General settings (Required)"
-  options:
-    - "ext4"
-    - "xfs"
     
 - variable: controllerCount
   label: "Defines Controller count"
@@ -49,5 +40,152 @@ questions:
   group: "General settings (Required)"
   default: 1
 
-
+- variable: controller.nodeSelector
+  label: "Defines Worker Node selector for Controller"
+  type: string
+  default: ""
+  required: false
+  group: "General settings (Required)"
   
+- variable: controller.tolerations
+  label: "Defines Tolerations for Controller"
+  type: string
+  default: ""
+  required: false
+  group: "General settings (Required)"
+  
+- variable: node.nodeSelector
+  label: "Defines Worker Node selector for Node"
+  type: string
+  default: ""
+  required: false
+  show_if: "storageType=isilon"
+  group: "General settings (Required)"
+  
+- variable: node.tolerations
+  label: "Defines Tolerations for Node"
+  type: string
+  default: ""
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: node.dnsPolicy
+  label: "Defines DNS POlicy for Node"
+  type: string
+  default: "ClusterFirstWithHostNet"
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: maxIsilonVolumesPerNode
+  label: "Maximum Isilon volumes per node"
+  type: int
+  required: true
+  show_if: "storageType=isilon"
+  group: "General settings (Required)"
+  default: 1
+  
+- variable: allowedNetworks
+  label: "List of networks which can be used for NFS I/O traffic, CIDR format should be used. ex: 192.168.1.0/24"
+  type: string
+  default: ""
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: isiPort
+  label: "HTTPs port number of the PowerScale OneFS API server"
+  type: string
+  default: "8080"
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: isiInsecure
+  label: "Defines if PowerScale OneFS API server's certificate chain and host name should be verified"
+  type: boolean
+  default: true
+  show_if: "storageType=isilon"
+  required: true
+  group: "General settings (Required)"
+  
+- variable: isiAccessZone
+  label: "Defines the name of the access zone a volume can be created in"
+  type: string
+  default: "System"
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: enableDebug
+  label: "Indicates whether debug level logs should be logged"
+  type: boolean
+  default: false
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: verbose
+  label: "Indicates what content of the OneFS REST API message should be logged in debug level logs"
+  type: int
+  default: 1
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: enableQuota
+  label: "Indicates whether the provisioner should attempt to set (later unset) quota on a newly provisioned volume"
+  type: boolean
+  default: true
+  show_if: "storageType=isilon"
+  required: true
+  group: "General settings (Required)"
+  
+- variable: noProbeOnStart
+  label: "Indicates whether the controller/node should probe during initialization"
+  type: boolean
+  default: false
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: isiPath
+  label: "Defines the default base path for the volumes to be created"
+  type: string
+  default: "/ifs/data/csi"
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: autoProbe
+  label: "Enable auto probe"
+  type: boolean
+  default: true
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: nfsV3
+  label: "Specify whether to set the version to v3 when mounting an NFS export"
+  type: boolean
+  default: false
+  show_if: "storageType=isilon"
+  required: true
+  group: "General settings (Required)"
+  
+- variable: enableCustomTopology
+  label: "Specify if custom topology label <provisionerName>.dellemc.com/<powerscalefqdnorip>:<provisionerName> has to be used for making connection to backend PowerScale Array"
+  type: boolean
+  default: false
+  show_if: "storageType=isilon"
+  required: false
+  group: "General settings (Required)"
+  
+- variable: maxIsilonVolumesPerNode
+  label: "Specify default value for maximum number of volumes that controller can publish to the node"
+  type: int
+  default: 0
+  show_if: "storageType=isilon"
+  required: true
+  group: "General settings (Required)"
