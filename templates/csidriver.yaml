@@ -7,7 +7,7 @@ kind: CSIDriver
 {{ if eq .Values.storageType "unity" }}
 metadata:
     name: csi-unity.dellemc.com
-{{ else if eq .Values.storageType "powerscale" }}
+{{ else if eq .Values.storageType "isilon" }}
 metadata:
     name: csi-isilon.dellemc.com
 {{ end }}
